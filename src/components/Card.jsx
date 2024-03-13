@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { FaCalendar, FaUser } from "react-icons/fa";
 
+import parse from "html-react-parser";
+
 function Card({
     $id,
     $createdAt,
@@ -18,14 +20,10 @@ function Card({
         dateObj.getMonth() + 1
     }/${dateObj.getFullYear()}`;
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }, []);
-
     return (
         <Link to={`/post/${$id}`}>
             <article
-                className={`shadow-lg overflow-hidden duration-300 hover:-translate-y-1 hover:shadow-xl ${className}`}
+                className={`bg-white shadow-lg overflow-hidden duration-300 hover:-translate-y-1 hover:shadow-xl ${className}`}
             >
                 <div
                     className={`w-[30%] ${widthFull ? "md:w-full" : undefined}`}
@@ -33,7 +31,7 @@ function Card({
                     <img
                         src={appwriteService.getFilePreview(featuredImage)}
                         alt={title}
-                        className="block object-cover w-full"
+                        className="block object-cover w-full h-[110px] md:h-auto"
                     />
                 </div>
 
@@ -45,6 +43,7 @@ function Card({
                     <h3 className="text-sm font-semibold text-slate-800 mb-1 md:text-xl">
                         {title}
                     </h3>
+
                     <div className="flex items-center gap-2 text-[11px] text-slate-400">
                         <FaUser />
                         <p>{author}</p>

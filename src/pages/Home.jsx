@@ -40,18 +40,6 @@ function Home() {
         );
     }
 
-    // if (authStatus && !posts.length) {
-    //     return (
-    //         <div className="w-full py-8">
-    //             <Container>
-    //                 <div className="flex flex-wrap">
-    //                     <h1>No Posts...</h1>
-    //                 </div>
-    //             </Container>
-    //         </div>
-    //     );
-    // }
-
     return !loading ? (
         <Animate className="w-[95%] max-w-[1200px] mx-auto py-8">
             <h1 className="text-2xl font-semibold text-slate-800 text-center">

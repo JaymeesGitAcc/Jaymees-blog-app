@@ -8,6 +8,7 @@ import authService from "./appwrite/auth";
 
 import { AnimatePresence } from "framer-motion";
 import Loading from "./components/Loading";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -40,6 +41,7 @@ function App() {
                     <div className="w-full block">
                         <Footer />
                     </div>
+                    <ScrollToTop />
                 </div>
             </AnimatePresence>
         </>

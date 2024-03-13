@@ -36,65 +36,74 @@ function Login() {
     };
 
     return (
-        <div className="flex items-center justify-center w-full">
-            <div
-                className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
-            >
-                <div className="mb-2 flex justify-center">
-                    <span className="inline-block w-full max-w-[100px]">
-                        <Logo width="100%" />
-                    </span>
+        <main className="w-[95%] max-w-[1000px] mx-auto rounded-xl overflow-hidden shadow-md shadow-gray-400 md:flex md:min-h-[600px]">
+            <div className="flex items-center py-6 md:w-[65%] md:py-6">
+                <div className="w-full mx-auto md:w-[65%]">
+                    <h2 className="text-center text-2xl text-[#29ca8e] font-bold leading-tight my-8 md:text-4xl">
+                        Login to Your Account
+                    </h2>
+                    {error && (
+                        <p className="text-red-600 my-4 text-center">{error}</p>
+                    )}
+                    <form onSubmit={handleSubmit(login)} className="px-10">
+                        <div className="space-y-4">
+                            <Input
+                                type="email"
+                                placeholder="Email"
+                                className="rounded-full"
+                                {...register("email", {
+                                    required: true,
+                                })}
+                            />
+
+                            <div className="relative">
+                                <Input
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Password"
+                                    className="rounded-full"
+                                    {...register("password", {
+                                        required: true,
+                                    })}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setShowPassword(!showPassword);
+                                    }}
+                                    className="absolute z-10 right-4 bottom-3 text-slate-500"
+                                >
+                                    {showPassword ? <FaEye /> : <FaEyeSlash />}
+                                </button>
+                            </div>
+                            <Button
+                                type="submit"
+                                className="block w-full rounded-full max-w-[180px] text-sm py-3 mx-auto"
+                                bgColor="bg-[#29ca8e] duration-300 hover:bg-[#156748]"
+                            >
+                                Sign in{" "}
+                            </Button>
+                        </div>
+                    </form>
                 </div>
-                <h2 className="text-center text-2xl font-bold leading-tight">
-                    Sign in to your account
-                </h2>
-                <p className="mt-2 text-center text-base text-black/60">
-                    Don&apos;t have any account?&nbsp;
+            </div>
+            <div className="bg-[#29ca8e] text-white flex items-center bg-gradient-to-r from-[#26bc84] to-[#29ca8e] md:my-0 md:w-[35%]">
+                <div className="text-center p-4">
+                    <h1 className="text-2xl font-bold md:text-4xl">
+                        New Here?
+                    </h1>
+                    <p className="my-6 text-xl">
+                        Sign up and discover amazing blog posts and even write
+                        your own!
+                    </p>
                     <Link
                         to="/signup"
-                        className="font-medium text-primary transition-all duration-200 hover:underline"
+                        className="block w-full rounded-full max-w-[180px] text-sm py-3 mx-auto bg-white text-[#29ca8e] duration-300 hover:bg-[#156748] hover:text-white"
                     >
-                        Sign Up
+                        Sign up
                     </Link>
-                </p>
-                {error && (
-                    <p className="text-red-600 mt-8 text-center">{error}</p>
-                )}
-                <form onSubmit={handleSubmit(login)} className="mt-8">
-                    <div className="space-y-5">
-                        <Input
-                            label="Email : "
-                            placeholder="Email Address"
-                            type="email"
-                            {...register("email", {
-                                required: true,
-                            })}
-                        />
-                        <div className="relative border-2 border-red-500">
-                            <Input
-                                label="Password : "
-                                type={showPassword ? "text" : "password"}
-                                placeholder="Password"
-                                {...register("password", { required: true })}
-                            />
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setShowPassword((pwd) => !pwd);
-                                }}
-                                className="absolute z-10 right-4 bottom-3 text-slate-500"
-                            >
-                                {showPassword ? <FaEye /> : <FaEyeSlash />}
-                            </button>
-                        </div>
-                        <Button type="submit" className="w-full">
-                            Sign in{" "}
-                        </Button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
+        </main>
     );
 }
 

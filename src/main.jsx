@@ -13,6 +13,7 @@ import AllPosts from "./pages/AllPosts.jsx";
 import AddPost from "./pages/AddPost.jsx";
 import EditPost from "./pages/EditPost.jsx";
 import Post from "./pages/Post.jsx";
+import PostsByGenre from "./pages/PostsByGenre.jsx";
 
 const router = createBrowserRouter([
     {
@@ -68,6 +69,14 @@ const router = createBrowserRouter([
                 element: (
                     <Protected authenticaton>
                         <Post />
+                    </Protected>
+                ),
+            },
+            {
+                path: "posts-by-genre/:genre",
+                element: (
+                    <Protected authenticaton>
+                        <PostsByGenre />
                     </Protected>
                 ),
             },

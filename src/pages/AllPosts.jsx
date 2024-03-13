@@ -12,7 +12,6 @@ function AllPosts() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setLoading(true);
         appwriteService
             .getPosts([])
             .then((posts) => {
@@ -25,8 +24,6 @@ function AllPosts() {
                 setLoading(false);
             });
     }, []);
-
-    // const heading = posts?.length ? "All Blogs" : "No blogs...";
 
     return !loading ? (
         <Animate className="w-[95%] max-w-[1200px] mx-auto py-8">

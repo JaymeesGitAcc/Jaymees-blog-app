@@ -13,11 +13,11 @@ function PostCard({ $id, $createdAt, title, featuredImage, author }) {
     return (
         <article className="w-full bg-white my-4 overflow-hidden shadow-xl">
             <Link to={`/post/${$id}`}>
-                <div className="relative w-full md:h-[260px] overflow-hidden">
+                <div className="relative w-full overflow-hidden sm:h-[260px]">
                     <img
                         src={appwriteService.getFilePreview(featuredImage)}
                         alt={title}
-                        className="h-full w-full object-cover max-h-[300px] duration-300 scale-105 hover:scale-100"
+                        className="h-full w-full object-cover duration-300 scale-105 hover:scale-100"
                     />
                     <div className="absolute bottom-4 left-4 text-slate-100 font-semibold flex items-center gap-2">
                         <FaUser />
