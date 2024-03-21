@@ -15,19 +15,15 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
     const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
     const dispatch = useDispatch();
     const location = useLocation();
 
     const authStatus = useSelector((state) => state.auth.status);
 
     useEffect(() => {
-        // setLoading(true);
-        // console.log("app...");
         authService
             .getCurrentUser()
             .then((userData) => {
-                // console.log(authStatus);
                 if (userData) {
                     dispatch(login({ userData }));
                 } else {
@@ -37,33 +33,30 @@ function App() {
             .finally(() => setLoading(false));
     }, [authStatus, dispatch]);
 
-    // const loginSuccessfulMessage = () => {
-    //     toast.success("You are Logged in!", {
-    //         position: "bottom-right",
-    //     });
-    // };
+    function showSuccessMessage() {
+        toast.success("You are logged in!", {
+            position: "bottom-right",
+        });
+    }
 
-    // const showSuccessMessage = () => {
-    //     toast.success("You are logged in!", {
-    //         position: "bottom-right",
-    //     });
-    // };
+    function logoutSuccessfulMessage() {
+        toast.success("You are Logged out!", {
+            position: "bottom-right",
+        });
+    }
 
-    // const logoutSuccessfulMessage = () => {
-    //     toast.success("You are Logged out!", {
-    //         position: "bottom-right",
-    //     });
-    // };
+    useEffect(() => {
+        console.log("checking authStatus");
+        console.log(authStatus);
 
-    // useEffect(() => {
-    //     console.log("checking authStatus");
-    //     console.log(authStatus);
-    //     if (authStatus) {
-    //         showSuccessMessage();
-    //     } else {
-    //         logoutSuccessfulMessage();
-    //     }
-    // }, [authStatus]);
+        if (authStatus !== null) {
+            if (authStatus) {
+                showSuccessMessage();
+            } else {
+                logoutSuccessfulMessage();
+            }
+        }
+    }, [authStatus]);
 
     return !loading ? (
         <>
