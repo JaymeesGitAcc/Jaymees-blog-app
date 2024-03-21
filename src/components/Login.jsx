@@ -9,7 +9,6 @@ import { login as authLogin } from "../store/authSlice";
 
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-import Spinner from "./Spinner";
 
 function Login() {
     const [showPassword, setShowPassword] = useState(false);
@@ -86,14 +85,7 @@ function Login() {
                                 className="block w-full max-w-[120px] rounded-full text-sm py-3 mx-auto md:max-w-[180px]"
                                 bgColor="bg-[#29ca8e] duration-300 hover:bg-[#156748]"
                             >
-                                {loading ? (
-                                    <span className="inline-block w-full flex items-center gap-2 text-center">
-                                        <Spinner />
-                                        Signing in...
-                                    </span>
-                                ) : (
-                                    "Sign in"
-                                )}
+                                {loading ? " Signing in..." : "Sign in"}
                             </Button>
                         </div>
                     </form>

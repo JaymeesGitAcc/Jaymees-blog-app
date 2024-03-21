@@ -32,12 +32,12 @@ function Home() {
 
     if (!authStatus) {
         return (
-            <div className="w-full min-h-screen">
-                <Container>
-                    <div className="flex flex-wrap">
-                        <h1>Login to read posts</h1>
-                    </div>
-                </Container>
+            <div className="flex items-center justify-center w-full min-h-screen">
+                <div className="">
+                    <h1 className="text-2xl text-slate-800 font-semibold">
+                        Login to read posts
+                    </h1>
+                </div>
             </div>
         );
     }
@@ -55,9 +55,9 @@ function Home() {
                             <PostCard
                                 key={post.$id}
                                 {...post}
-                                className={`rounded-lg h-[200px] first-of-type:col-span-2 first-of-type:row-span-2 ${
+                                className={`rounded-lg h-[180px] first-of-type:col-span-2 first-of-type:row-span-2 ${
                                     index === 1 ? "col-span-2" : ""
-                                } my-4 sm:h-[300px] md:my-0 md:h-auto`}
+                                } my-4 sm:h-[250px] md:my-0 md:h-auto`}
                                 titleSize={index === 0 ? "md:text-4xl" : ""}
                             />
                         ))}
