@@ -6,16 +6,16 @@ import appwriteService from "../appwrite/config";
 
 import Button from "../components/Button";
 import Container from "../components/container/Container";
-import Card from "../components/Card";
+import Card from "../components/CustomizableCard";
 import Animate from "../components/Animate";
-import Loading from "../components/Loading";
 import GenresContainer from "../components/GenresContainer";
 
 import { FaUser } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import PostLoader from "../components/loaders/PostLoader";
+import PostSkeleton from "../components/loaders/PostSkeleton";
+import PostCard from "../components/PostCard";
 
 function Post() {
     const [post, setPost] = useState(null);
@@ -86,7 +86,7 @@ function Post() {
     return !loading ? (
         <>
             <Animate className="py-10 max-w-[1250px] mx-auto md:flex flex-wrap grow">
-                <main className="grow md:w-[77%]">
+                <main className="grow md:w-[70%] lg:w-[75%] xl:w-[77%]">
                     <article className="p-4">
                         <div className="font-semibold">
                             <h1 className="text-2xl text-slate-800 sm:text-3xl md:text-4xl">
@@ -111,7 +111,7 @@ function Post() {
                                 </div>
                             </div>
                         </div>
-                        <div className="mb-4 relative overflow-hidden max-h-[500px]">
+                        <div className="mb-4 relative overflow-hidden max-h-[500px] rounded-lg">
                             <img
                                 src={appwriteService.getFilePreview(
                                     post.featuredImage
@@ -146,23 +146,24 @@ function Post() {
                     </Container>
 
                     {sameGenrePosts?.length > 0 && (
-                        <Container>
+                        <div className="px-4">
                             <h2 className="text-2xl font-semibold text-slate-800 mt-8 mb-4">
                                 You may also like
                             </h2>
-                            {sameGenrePosts.map((post) => (
-                                <Card
-                                    key={post.featuredImage}
-                                    {...post}
-                                    className="flex items-center my-4"
-                                    widthFull={false}
-                                />
-                            ))}
-                        </Container>
+                            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                {sameGenrePosts.map((post) => (
+                                    <PostCard
+                                        key={post.featuredImage}
+                                        {...post}
+                                        className="rounded-lg"
+                                    />
+                                ))}
+                            </div>
+                        </div>
                     )}
                 </main>
 
-                <div className="p-4 md:w-[23%]">
+                <div className="p-4 md:w-[30%] lg:w-[25%] xl:w-[23%]">
                     {otherPosts?.length > 0 && (
                         <aside>
                             {genreList.length && (
@@ -176,13 +177,16 @@ function Post() {
                             <h2 className="text-2xl text-slate-800 font-semibold mb-4">
                                 Other posts
                             </h2>
-                            <ul>
+                            <div>
                                 {otherPosts?.map((post) => (
-                                    <li key={post.$id} className="mb-8">
-                                        <Card {...post} />
-                                    </li>
+                                    <PostCard
+                                        key={post.$id}
+                                        {...post}
+                                        className="rounded-lg my-4"
+                                        showArrow={false}
+                                    />
                                 ))}
-                            </ul>
+                            </div>
                             {otherPosts.length > 0 ? (
                                 <Link
                                     to={`/all-posts`}
@@ -197,8 +201,7 @@ function Post() {
             </Animate>
         </>
     ) : (
-        <PostLoader />
-        // <Loading />
+        <PostSkeleton />
     );
 }
 

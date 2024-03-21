@@ -3,17 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
-import Logo from "./Logo";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { login as authLogin } from "../store/authSlice";
 
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import Spinner from "./Spinner";
 
 function Login() {
-    const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -21,6 +22,7 @@ function Login() {
 
     const login = async (data) => {
         setError("");
+        setLoading(true);
         try {
             const session = await authService.login(data);
             if (session) {
@@ -32,14 +34,16 @@ function Login() {
             }
         } catch (error) {
             setError(error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <main className="w-[95%] max-w-[1000px] mx-auto rounded-xl overflow-hidden shadow-md shadow-gray-400 md:flex md:min-h-[600px]">
-            <div className="flex items-center py-6 md:w-[65%] md:py-6">
+        <main className="w-full max-w-[1000px] mx-auto overflow-hidden md:w-[95%] md:rounded-xl md:shadow-md md:shadow-gray-400 md:flex md:min-h-[600px]">
+            <div className="flex items-center my-4 md:my-0 md:w-[65%] md:py-6">
                 <div className="w-full mx-auto md:w-[65%]">
-                    <h2 className="text-center text-2xl text-[#29ca8e] font-bold leading-tight my-8 md:text-4xl">
+                    <h2 className="text-center text-3xl text-[#29ca8e] font-bold leading-tight my-8 md:text-4xl">
                         Login to Your Account
                     </h2>
                     {error && (
@@ -54,6 +58,7 @@ function Login() {
                                 {...register("email", {
                                     required: true,
                                 })}
+                                required
                             />
 
                             <div className="relative">
@@ -64,6 +69,7 @@ function Login() {
                                     {...register("password", {
                                         required: true,
                                     })}
+                                    required
                                 />
                                 <button
                                     type="button"
@@ -77,27 +83,32 @@ function Login() {
                             </div>
                             <Button
                                 type="submit"
-                                className="block w-full rounded-full max-w-[180px] text-sm py-3 mx-auto"
+                                className="block w-full max-w-[120px] rounded-full text-sm py-3 mx-auto md:max-w-[180px]"
                                 bgColor="bg-[#29ca8e] duration-300 hover:bg-[#156748]"
                             >
-                                Sign in{" "}
+                                {loading ? (
+                                    <span className="inline-block w-full flex items-center gap-2 text-center">
+                                        <Spinner />
+                                        Signing in...
+                                    </span>
+                                ) : (
+                                    "Sign in"
+                                )}
                             </Button>
                         </div>
                     </form>
                 </div>
             </div>
             <div className="bg-[#29ca8e] text-white flex items-center bg-gradient-to-r from-[#26bc84] to-[#29ca8e] md:my-0 md:w-[35%]">
-                <div className="text-center p-4">
-                    <h1 className="text-2xl font-bold md:text-4xl">
-                        New Here?
-                    </h1>
-                    <p className="my-6 text-xl">
+                <div className="text-center p-4 mx-auto">
+                    <h1 className="text-xl font-bold md:text-4xl">New Here?</h1>
+                    <p className="text-md my-2 md:my-6">
                         Sign up and discover amazing blog posts and even write
                         your own!
                     </p>
                     <Link
                         to="/signup"
-                        className="block w-full rounded-full max-w-[180px] text-sm py-3 mx-auto bg-white text-[#29ca8e] duration-300 hover:bg-[#156748] hover:text-white"
+                        className="block w-full rounded-full max-w-[120px] text-sm py-3 mx-auto bg-white text-[#29ca8e] duration-300 hover:bg-[#156748] hover:text-white md:max-w-[180px]"
                     >
                         Sign up
                     </Link>

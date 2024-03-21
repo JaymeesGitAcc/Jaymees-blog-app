@@ -1,10 +1,13 @@
 export const genres = [
     "general",
     "science & technology",
+    "sports",
     "nature",
     "culture",
     "philosophy",
+    "education",
     "animals",
+    "relationship",
     "spirituality",
     "religion",
     "health",

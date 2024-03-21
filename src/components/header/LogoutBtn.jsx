@@ -2,8 +2,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import authService from "../../appwrite/auth.js";
 import { logout } from "../../store/authSlice.js";
+import { MdLogout } from "react-icons/md";
 
-function LogoutBtn() {
+function LogoutBtn({ className = "" }) {
     const dispatch = useDispatch();
 
     const logoutHandler = () => {
@@ -12,7 +13,8 @@ function LogoutBtn() {
         });
     };
     return (
-        <button className="duration-200" onClick={logoutHandler}>
+        <button className={className} onClick={logoutHandler}>
+            <MdLogout />
             Logout
         </button>
     );

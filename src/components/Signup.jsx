@@ -11,16 +11,19 @@ import { login } from "../store/authSlice";
 import { FaEye, FaLock, FaUser } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import Spinner from "./Spinner";
 
 function Signup() {
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
 
     const create = async (data) => {
         setError("");
+        setLoading(true);
         try {
             const userData = await authService.createAccount(data);
             if (userData) {
@@ -30,6 +33,8 @@ function Signup() {
             }
         } catch (error) {
             setError(error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -60,13 +65,14 @@ function Signup() {
                     {error && (
                         <p className="text-red-600 mt-8 text-center">{error}</p>
                     )}
-                    <form onSubmit={handleSubmit(create)}>
+                    <form onSubmit={handleSubmit(create)} autoComplete="off">
                         <div className="space-y-4">
                             <div className="relative">
                                 <Input
                                     {...register("name", { required: true })}
                                     placeholder="Full name"
                                     className="rounded-full pl-10"
+                                    autoComplete="new-password"
                                     required
                                 />
                                 <i className="absolute bottom-3 left-3 text-gray-400">
@@ -81,6 +87,7 @@ function Signup() {
                                         required: true,
                                     })}
                                     placeholder="Email"
+                                    autoComplete="new-password"
                                     className="rounded-full pl-10"
                                     required
                                 />
@@ -93,6 +100,7 @@ function Signup() {
                                     type={showPassword ? "text" : "password"}
                                     placeholder="Password"
                                     className="rounded-full pl-10"
+                                    autoComplete="new-password"
                                     {...register("password", {
                                         required: true,
                                     })}
@@ -116,7 +124,14 @@ function Signup() {
                                 className="block w-full rounded-full max-w-[180px] text-sm py-3 mx-auto"
                                 bgColor="bg-[#29ca8e] duration-300 hover:bg-[#156748]"
                             >
-                                Sign up
+                                {loading ? (
+                                    <span className="inline-block w-full flex items-center gap-2 text-center">
+                                        <Spinner />
+                                        Processing...
+                                    </span>
+                                ) : (
+                                    "Sign up"
+                                )}
                             </Button>
                         </div>
                     </form>

@@ -14,6 +14,8 @@ import AddPost from "./pages/AddPost.jsx";
 import EditPost from "./pages/EditPost.jsx";
 import Post from "./pages/Post.jsx";
 import PostsByGenre from "./pages/PostsByGenre.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const router = createBrowserRouter([
     {
@@ -79,6 +81,18 @@ const router = createBrowserRouter([
                         <PostsByGenre />
                     </Protected>
                 ),
+            },
+            {
+                path: "profile",
+                element: (
+                    <Protected authenticaton>
+                        <Profile />
+                    </Protected>
+                ),
+            },
+            {
+                path: "*",
+                element: <NotFound />,
             },
         ],
     },

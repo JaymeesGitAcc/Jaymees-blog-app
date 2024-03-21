@@ -1,47 +1,56 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import appwriteService from "../appwrite/config.js";
-import { FaUser } from "react-icons/fa";
+import { FaArrowRight, FaUser } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 
-function PostCard({ $id, $createdAt, title, featuredImage, author }) {
+function PostCard({
+    $id,
+    $createdAt,
+    title,
+    featuredImage,
+    genre,
+    author,
+    className = "",
+    titleSize = "text-md",
+    showArrow = true,
+}) {
     const dateObj = new Date($createdAt);
     const addedOn = `${dateObj.getDate()}/${
         dateObj.getMonth() + 1
     }/${dateObj.getFullYear()}`;
 
     return (
-        <article className="w-full bg-white my-4 overflow-hidden shadow-xl">
+        <article
+            className={`w-full bg-white overflow-hidden shadow-lg shadow-slate-300 ${className}`}
+        >
             <Link to={`/post/${$id}`}>
-                <div className="relative w-full overflow-hidden sm:h-[260px]">
+                <div className="group relative w-full h-full overflow-hidden after:absolute after:inset-0 after:bg-black after:opacity-40">
                     <img
                         src={appwriteService.getFilePreview(featuredImage)}
                         alt={title}
-                        className="h-full w-full object-cover duration-300 scale-105 hover:scale-100"
+                        className="h-full w-full object-cover duration-300 scale-105 group-hover:scale-100"
                     />
-                    <div className="absolute bottom-4 left-4 text-slate-100 font-semibold flex items-center gap-2">
-                        <FaUser />
-                        <h3>{author}</h3>
-                        <FaCalendarAlt />
-                        <h3>{addedOn}</h3>
+                    <div className="absolute bottom-4 left-4 right-2 text-slate-100 font-semibold z-20">
+                        <div className={`text-white my-2 ${titleSize}`}>
+                            <h1>{title}</h1>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                            <FaUser />
+                            <h3>{author}</h3>
+                            <FaCalendarAlt />
+                            <h3>{addedOn}</h3>
+                        </div>
                     </div>
+                    {showArrow && (
+                        <div className="absolute h-8 w-8 z-20 bg-[#29ca8e] text-white rounded-full flex items-center justify-center top-[50%] opacity-0 right-10 duration-300 -translate-y-[50%] group-hover:opacity-100 group-hover:right-5">
+                            <i>
+                                <FaArrowRight />
+                            </i>
+                        </div>
+                    )}
                 </div>
             </Link>
-
-            <section className="p-4">
-                <Link to={`/post/${$id}`}>
-                    <h2 className="first-letter:uppercase text-xl font-semibold text-slate-700 mb-4 duration-300 hover:text-[#29ca8e]">
-                        {title}
-                    </h2>
-                </Link>
-
-                <Link
-                    to={`/post/${$id}`}
-                    className="block text-center p-1 text-[#29ca8e] border-[1px] border-[#29ca8e] rounded-xl duration-300 hover:text-white hover:bg-[#29ca8e]"
-                >
-                    Read More
-                </Link>
-            </section>
         </article>
     );
 }

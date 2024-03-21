@@ -4,7 +4,7 @@ import Animate from "../components/Animate";
 
 function Login() {
     return (
-        <Animate className="py-8">
+        <Animate className="md:py-8">
             <LoginComponent />
         </Animate>
     );

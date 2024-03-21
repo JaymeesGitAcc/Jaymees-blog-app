@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "./store/authSlice";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
@@ -10,14 +10,20 @@ import { AnimatePresence } from "framer-motion";
 import Loading from "./components/Loading";
 import ScrollToTop from "./components/ScrollToTop";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
     const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
     const location = useLocation();
 
+    const authStatus = useSelector((state) => state.auth.status);
+
     useEffect(() => {
         setLoading(true);
+
         authService
             .getCurrentUser()
             .then((userData) => {
@@ -28,7 +34,28 @@ function App() {
                 }
             })
             .finally(() => setLoading(false));
-    }, [dispatch]);
+        setLoading(false);
+    }, [dispatch, authStatus]);
+
+    const loginSuccessfulMessage = () => {
+        toast.success("You are Logged in!", {
+            position: "bottom-right",
+        });
+    };
+
+    const logoutSuccessfulMessage = () => {
+        toast.success("You are Logged out!", {
+            position: "bottom-right",
+        });
+    };
+
+    useEffect(() => {
+        if (authStatus) {
+            loginSuccessfulMessage();
+        } else {
+            logoutSuccessfulMessage();
+        }
+    }, [authStatus]);
 
     return !loading ? (
         <>
@@ -44,6 +71,7 @@ function App() {
                     <ScrollToTop />
                 </div>
             </AnimatePresence>
+            <ToastContainer />
         </>
     ) : (
         <Loading />
