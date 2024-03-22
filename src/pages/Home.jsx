@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Animate from "../components/Animate";
 import Loading from "../components/Loading";
 import Carousel from "../components/Carousel";
+import HomeSkeleton from "../components/loaders/HomeSkeleton";
 // import { ToastContainer } from "react-toastify";
 
 function Home() {
@@ -73,7 +74,7 @@ function Home() {
             </Container>
         </Animate>
     ) : (
-        <Loading />
+        <HomeSkeleton />
     );
 }
 

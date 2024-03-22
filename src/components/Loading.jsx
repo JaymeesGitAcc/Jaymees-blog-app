@@ -1,9 +1,14 @@
 import React from "react";
+import { CgSpinner } from "react-icons/cg";
 
-function Loading({ className = "", ...props }) {
+function Loading({ className = "" }) {
     return (
-        <div className="relative min-h-screen flex items-center justify-center">
-            <h1>loading...</h1>
+        <div
+            className={`relative min-h-screen flex items-center justify-center ${className}`}
+        >
+            <div className="animate-spin">
+                <CgSpinner className="text-4xl" />
+            </div>
         </div>
     );
 }
