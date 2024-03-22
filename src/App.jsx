@@ -10,7 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import Loading from "./components/Loading";
 import ScrollToTop from "./components/ScrollToTop";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
     const authStatus = useSelector((state) => state.auth.status);
 
     useEffect(() => {
+        setLoading(true);
         authService
             .getCurrentUser()
             .then((userData) => {
@@ -32,31 +33,6 @@ function App() {
             })
             .finally(() => setLoading(false));
     }, [authStatus, dispatch]);
-
-    function showSuccessMessage() {
-        toast.success("You are logged in!", {
-            position: "bottom-right",
-        });
-    }
-
-    function logoutSuccessfulMessage() {
-        toast.success("You are Logged out!", {
-            position: "bottom-right",
-        });
-    }
-
-    useEffect(() => {
-        console.log("checking authStatus");
-        console.log(authStatus);
-
-        if (authStatus !== null) {
-            if (authStatus) {
-                showSuccessMessage();
-            } else {
-                logoutSuccessfulMessage();
-            }
-        }
-    }, [authStatus]);
 
     return !loading ? (
         <>

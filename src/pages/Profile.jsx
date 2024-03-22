@@ -6,6 +6,7 @@ import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { toast } from "react-toastify";
 import FlexCard from "../components/FlexCard";
+import LogoutBtn from "../components/header/LogoutBtn";
 
 function Profile() {
     const [posts, setPosts] = useState(null);
@@ -42,10 +43,14 @@ function Profile() {
                 setPosts(updatedPosts);
             })
             .then(() => {
-                toast.success("Post deleted successfully!");
+                toast.success("Post deleted successfully!", {
+                    position: "bottom-right",
+                });
             })
             .catch(() => {
-                toast.error("Could not delete post!");
+                toast.error("Could not delete post!", {
+                    position: "bottom-right",
+                });
             });
     };
 
@@ -55,7 +60,7 @@ function Profile() {
 
     return (
         <Animate>
-            <main className="w-[95%] max-w-[1200px] mx-auto min-h-[90vh]">
+            <main className="relative w-[95%] max-w-[1200px] mx-auto min-h-[90vh]">
                 <section className="text-slate-800 space-y-6 p-4 my-4">
                     <div className="flex items-center gap-4 text-4xl">
                         <FaUser className="text-6xl" />
@@ -76,6 +81,8 @@ function Profile() {
                         <h2 className="font-bold">Posts:</h2>
                         <p className="font-semibold">{userPosts?.length}</p>
                     </div>
+
+                    <LogoutBtn className="sm:absolute mx-auto top-0 right-0 flex items-center gap-2 text-[#29ca8e] font-semibold border border-[#29ca8e] rounded-full px-4 py-2 duration-300 hover:bg-[#29ca8e] hover:text-white" />
                 </section>
 
                 <section>

@@ -11,6 +11,7 @@ import { login } from "../store/authSlice";
 import { FaEye, FaLock, FaUser } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { CgSpinner } from "react-icons/cg";
 
 function Signup() {
     const [error, setError] = useState("");
@@ -49,7 +50,7 @@ function Signup() {
                     </p>
                     <Link
                         to="/login"
-                        className="block w-full rounded-full max-w-[180px] text-sm py-3 mx-auto bg-white text-[#29ca8e] duration-300 hover:bg-[#156748] hover:text-white"
+                        className="inline-block rounded-full max-w-[180px] text-sm py-3 px-6 mx-auto bg-white text-[#29ca8e] duration-300 hover:bg-[#156748] hover:text-white sm:w-[180px]"
                     >
                         Sign in
                     </Link>
@@ -120,10 +121,17 @@ function Signup() {
                             </div>
                             <Button
                                 type="submit"
-                                className="block w-full rounded-full max-w-[180px] text-sm py-3 mx-auto"
+                                className="flex items-center justify-center gap-2 rounded-full text-sm py-3 px-6 mx-auto sm:w-[180px]"
                                 bgColor="bg-[#29ca8e] duration-300 hover:bg-[#156748]"
                             >
-                                {loading ? "Signing up..." : "Sign up"}
+                                {loading ? (
+                                    <>
+                                        <CgSpinner className="animate-spin text-xl" />
+                                        Signing-up...
+                                    </>
+                                ) : (
+                                    "Sign-up"
+                                )}
                             </Button>
                         </div>
                     </form>

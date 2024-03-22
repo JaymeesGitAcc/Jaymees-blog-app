@@ -124,7 +124,7 @@ function Post() {
                             {parse(post.content)}
                         </div>
                     </article>
-                    <Container>
+                    {/* <Container>
                         {isAuthor && (
                             <div className="absolute-right-6 top-6">
                                 <Link to={`/edit-post/${post.$id}`}>
@@ -143,7 +143,7 @@ function Post() {
                                 </Button>
                             </div>
                         )}
-                    </Container>
+                    </Container> */}
 
                     {sameGenrePosts?.length > 0 && (
                         <div className="px-4">

@@ -5,6 +5,7 @@ import { FaBookReader, FaEdit, FaRegClock } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 function FlexCard({ title, featuredImage, $id, onDelete, getNumberOfDays }) {
+    const numberOfDays = getNumberOfDays();
     return (
         <div
             key={featuredImage}
@@ -28,7 +29,11 @@ function FlexCard({ title, featuredImage, $id, onDelete, getNumberOfDays }) {
 
                 <div className="flex items-center gap-1 text-slate-500">
                     <FaRegClock />
-                    <h2 className="text-sm">{getNumberOfDays()} days ago</h2>
+                    <h2 className="text-sm">
+                        {numberOfDays == 0
+                            ? "Today"
+                            : `${numberOfDays} days ago`}
+                    </h2>
                 </div>
 
                 <div className="flex items-center gap-4 font-semibold text-sm">

@@ -1,7 +1,7 @@
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function MobileMenu({ menuItems = [], className = "", onClick }) {
     const authStatus = useSelector((state) => state.auth.status);
@@ -18,7 +18,7 @@ function MobileMenu({ menuItems = [], className = "", onClick }) {
                     item.active ? (
                         <li
                             key={item.name}
-                            className="text-slate-800 font-semibold"
+                            className="text-slate-800 text-xl font-semibold"
                         >
                             {item.name !== "Sign Up" ? (
                                 <button
@@ -28,12 +28,20 @@ function MobileMenu({ menuItems = [], className = "", onClick }) {
                                     {item.icon ? item.icon : null}
                                     {item.name}
                                 </button>
-                            ) : null}
+                            ) : (
+                                <button
+                                    onClick={() => handleClick(item.slug)}
+                                    className="px-4 py-2 bg-[#29ca8e] text-white text-sm text-center w-full font-normal rounded-lg  duration-300 group-hover:bg-[#156748]"
+                                >
+                                    {item.icon ? item.icon : null}
+                                    {item.name}
+                                </button>
+                            )}
                         </li>
                     ) : null
                 )}
                 {authStatus && (
-                    <li className="text-slate-800 font-semibold">
+                    <li className="text-slate-800 font-semibold text-xl">
                         <button
                             onClick={() => handleClick("/profile")}
                             className="flex items-center gap-1"

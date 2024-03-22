@@ -7,7 +7,7 @@ import ProfileButton from "../ProfileButton";
 
 import { FaHome } from "react-icons/fa";
 import { FaList } from "react-icons/fa6";
-import { MdAddCircle, MdCancel, MdClose, MdLogin } from "react-icons/md";
+import { MdAddCircle, MdClose, MdLogin } from "react-icons/md";
 import MobileMenu from "../mobile_menu/MobileMenu";
 
 function Header() {
@@ -17,13 +17,13 @@ function Header() {
     const navItems = [
         {
             name: "Home",
-            icon: <FaHome className="text-lg" />,
+            icon: <FaHome />,
             slug: "/",
             active: true,
         },
         {
             name: "Login",
-            icon: <MdLogin className="text-lg" />,
+            icon: <MdLogin />,
             slug: "/login",
             active: !authStatus,
         },
@@ -40,7 +40,7 @@ function Header() {
         },
         {
             name: "Add",
-            icon: <MdAddCircle className="text-xl" />,
+            icon: <MdAddCircle />,
             slug: "/add-post",
             active: authStatus,
         },

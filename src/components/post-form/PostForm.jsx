@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../Button";
 import Input from "../Input";
@@ -8,8 +8,10 @@ import appwriteSerice from "../../appwrite/config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { genres } from "../../constants/genres";
+import { toast } from "react-toastify";
 
 export default function PostForm({ post }) {
+    const [submitting, setSubmitting] = useState(false);
     const { register, handleSubmit, watch, setValue, control, getValues } =
         useForm({
             defaultValues: {
@@ -26,6 +28,7 @@ export default function PostForm({ post }) {
     const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
+        setSubmitting(true);
         if (post) {
             const file = data.image[0]
                 ? await appwriteSerice.uploadFile(data.image[0])
@@ -39,6 +42,9 @@ export default function PostForm({ post }) {
                 featuredImage: file ? file.$id : undefined,
             });
             if (dbPost) {
+                toast.success("Post Updated!", {
+                    position: "bottom-right",
+                });
                 navigate(`/post/${dbPost.$id}`);
             }
         } else {
@@ -53,19 +59,24 @@ export default function PostForm({ post }) {
                 });
 
                 if (dbPost) {
+                    toast.success("Post added!", {
+                        position: "bottom-right",
+                    });
                     navigate(`/post/${dbPost.$id}`);
                 }
             }
         }
+        setSubmitting(false);
     };
 
     const slugTransform = useCallback((value) => {
-        if (value && typeof value === "string")
+        if (value && typeof value === "string") {
             return value
                 .trim()
                 .toLowerCase()
                 .replace(/[^a-zA-Z\d\s]+/g, "-")
                 .replace(/\s/g, "-");
+        }
     }, []);
 
     useEffect(() => {
@@ -82,10 +93,11 @@ export default function PostForm({ post }) {
         <form onSubmit={handleSubmit(submit)} className="lg:flex gap-4">
             <div className="grow lg:w-[70%]">
                 <Input
-                    label="Title: "
+                    label={post ? "Title" : "An interesing title: "}
                     placeholder="Title"
                     className="mb-4"
                     {...register("title", { required: true })}
+                    required
                 />
                 <Input
                     label="Slug: "
@@ -104,25 +116,27 @@ export default function PostForm({ post }) {
                     name="content"
                     control={control}
                     defaultValue={getValues("content")}
-                    // defaultValue={post ? post.content : ""}
                 />
             </div>
             <div className="lg:w-[30%]">
                 <Input
-                    label="Featured Image (accepted formats: png, jpg, jpeg): "
+                    label={post ? "Replace current image" : "Featured Image"}
                     type="file"
-                    className="mb-4"
+                    className="font-semibold my-4 md:my-0"
                     accept="image/png, image/jpg, image/jpeg"
                     {...register("image", { required: !post })}
                 />
                 {post && (
                     <div className="w-full mb-4">
+                        <p className="text-center my-4 font-semibold uppercase">
+                            current image
+                        </p>
                         <img
                             src={appwriteSerice.getFilePreview(
                                 post.featuredImage
                             )}
                             alt={post.title}
-                            className="max-w-[300px] mx-auto rounded-lg"
+                            className="w-full max-w-[300px] mx-auto rounded-lg"
                         />
                     </div>
                 )}
@@ -141,9 +155,15 @@ export default function PostForm({ post }) {
                 <Button
                     type="submit"
                     bgColor={post ? "bg-green-500" : undefined}
-                    className="w-full"
+                    className="block w-full max-w-[200px] mx-auto rounded-full"
                 >
-                    {post ? "Update" : "Submit"}
+                    {post
+                        ? submitting
+                            ? "Updating Post..."
+                            : "Update"
+                        : submitting
+                        ? "Adding Post..."
+                        : "Add Post"}
                 </Button>
             </div>
         </form>

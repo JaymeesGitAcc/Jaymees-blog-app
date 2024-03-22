@@ -5,9 +5,12 @@ import conf from "../conf/conf";
 
 function RTE({ name, control, label, defaultValue = "" }) {
     return (
-        <div className="w-full">
+        <div className="w-full my-4 md:my-0">
             {label && (
-                <label className="inline-block mb-1 pl-1"> {label}</label>
+                <label className="inline-block mb-1 pl-1 font-bold text-slate-800 tracking-wider md:text-lg">
+                    {" "}
+                    {label}
+                </label>
             )}
             <Controller
                 name={name || "content"}
