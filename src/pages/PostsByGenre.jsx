@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import service from "../appwrite/config";
-import Loading from "../components/Loading";
 import Animate from "../components/Animate";
 import PostCard from "../components/PostCard";
+import GridSkeleton from "../components/loaders/GridSkeleton";
 
 function PostsByGenre({ className = "", ...props }) {
     const [posts, setPosts] = useState([]);
@@ -45,14 +45,14 @@ function PostsByGenre({ className = "", ...props }) {
                         <PostCard
                             key={post.$id}
                             {...post}
-                            className="rounded-lg my-4 sm:my-0"
+                            className="rounded-lg my-4 h-[200px] sm:my-0 sm:h-[240px]"
                         />
                     ))}
                 </div>
             </Animate>
         </main>
     ) : (
-        <Loading />
+        <GridSkeleton />
     );
 }
 

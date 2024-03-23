@@ -17,7 +17,7 @@ const PostSkeleton = () => {
                         <div className="h-6 w-20 bg-gray-400 rounded-md"></div>
                     </div>
                 </div>
-                <div className="h-[250px] w-full bg-gray-400 mb-6 sm:h-[300px] md:h-[500px] rounded-lg"></div>
+                <div className="w-full bg-gray-400 mb-6 h-[350px] md:h-[500px] rounded-lg"></div>
 
                 {Array.from({ length: 3 })
                     .fill("")
@@ -51,7 +51,7 @@ const PostSkeleton = () => {
                                     key={index}
                                     className="my-6 border overflow-hidden rounded-lg"
                                 >
-                                    <div className="bg-gray-400 h-[45vh] sm:h-[60vh] md:h-[180px]"></div>
+                                    <div className="bg-gray-400 h-[150px] sm:h-[180px] md:my-0"></div>
                                 </div>
                             ))}
                     </div>

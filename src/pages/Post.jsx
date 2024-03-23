@@ -4,16 +4,11 @@ import { useSelector } from "react-redux";
 import parse from "html-react-parser";
 import appwriteService from "../appwrite/config";
 
-import Button from "../components/Button";
-import Container from "../components/container/Container";
-import Card from "../components/CustomizableCard";
 import Animate from "../components/Animate";
 import GenresContainer from "../components/GenresContainer";
 
 import { FaUser } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
 import PostSkeleton from "../components/loaders/PostSkeleton";
 import PostCard from "../components/PostCard";
 
@@ -69,14 +64,14 @@ function Post() {
         }
     }, [slug, navigate]);
 
-    const deletePost = () => {
-        appwriteService.deletePost(post.$id).then((status) => {
-            if (status) {
-                appwriteService.deleteFile(post.featuredImage);
-                navigate("/");
-            }
-        });
-    };
+    // const deletePost = () => {
+    //     appwriteService.deletePost(post.$id).then((status) => {
+    //         if (status) {
+    //             appwriteService.deleteFile(post.featuredImage);
+    //             navigate("/");
+    //         }
+    //     });
+    // };
 
     const dateObj = new Date(post?.$createdAt);
     const addedOn = `${dateObj.getDate()}/${
@@ -111,7 +106,7 @@ function Post() {
                                 </div>
                             </div>
                         </div>
-                        <div className="mb-4 relative overflow-hidden max-h-[500px] rounded-lg">
+                        <div className="mb-4 relative overflow-hidden rounded-lg h-[350px] md:h-auto md:max-h-[500px]">
                             <img
                                 src={appwriteService.getFilePreview(
                                     post.featuredImage
@@ -155,7 +150,7 @@ function Post() {
                                     <PostCard
                                         key={post.featuredImage}
                                         {...post}
-                                        className="rounded-lg"
+                                        className="rounded-lg h-[200px] md:h-auto"
                                     />
                                 ))}
                             </div>
@@ -177,20 +172,20 @@ function Post() {
                             <h2 className="text-2xl text-slate-800 font-semibold mb-4">
                                 Other posts
                             </h2>
-                            <div>
+                            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:block">
                                 {otherPosts?.map((post) => (
                                     <PostCard
                                         key={post.$id}
                                         {...post}
-                                        className="rounded-lg my-4"
-                                        showArrow={false}
+                                        className="rounded-lg h-[150px] md:my-4 sm:h-[180px]"
+                                        fontSize="text-sm"
                                     />
                                 ))}
                             </div>
                             {otherPosts.length > 0 ? (
                                 <Link
                                     to={`/all-posts`}
-                                    className="block text-[#29ca8e] text-center border-[1px] border-[#29ca8e] p-2 rounded-full duration-300 hover:bg-[#29ca8e] hover:text-white"
+                                    className="block my-4 text-[#29ca8e] text-center border-[1px] border-[#29ca8e] p-2 rounded-full duration-300 hover:bg-[#29ca8e] hover:text-white"
                                 >
                                     Read all
                                 </Link>

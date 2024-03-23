@@ -9,10 +9,9 @@ function PostCard({
     $createdAt,
     title,
     featuredImage,
-    genre,
     author,
     className = "",
-    titleSize = "text-md",
+    fontSize = "text-md",
     showArrow = true,
 }) {
     const dateObj = new Date($createdAt);
@@ -25,17 +24,21 @@ function PostCard({
             className={`w-full bg-white overflow-hidden shadow-lg shadow-slate-300 ${className}`}
         >
             <Link to={`/post/${$id}`}>
-                <div className="group relative w-full h-full overflow-hidden after:absolute after:inset-0 after:bg-black after:opacity-40">
+                <div className="group relative w-full h-full overflow-hidden after:absolute after:duration-300 after:inset-0 after:bg-black after:opacity-40 hover:after:opacity-35">
                     <img
                         src={appwriteService.getFilePreview(featuredImage)}
                         alt={title}
                         className="h-full w-full object-cover duration-300 scale-105 group-hover:scale-100"
                     />
-                    <div className="absolute bottom-4 left-4 right-2 text-slate-100 font-semibold z-20">
-                        <div className={`text-white my-2 ${titleSize}`}>
-                            <h1>{title}</h1>
+                    <div
+                        className={`absolute bottom-4 left-4 right-2 text-slate-100 font-semibold z-20 text-md ${fontSize}`}
+                    >
+                        <div className={`text-white my-2`}>
+                            <h1 className="text-[1em] font-semibold">
+                                {title}
+                            </h1>
                         </div>
-                        <div className="flex items-center gap-2 text-sm">
+                        <div className="flex items-center gap-2 text-[0.85em]">
                             <FaUser />
                             <h3>{author}</h3>
                             <FaCalendarAlt />
