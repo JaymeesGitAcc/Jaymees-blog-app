@@ -10,6 +10,7 @@ import { login as authLogin } from "../store/authSlice";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { CgSpinner } from "react-icons/cg";
+import GuestLogin from "./GuestLogin";
 
 function Login() {
     const [showPassword, setShowPassword] = useState(false);
@@ -23,6 +24,7 @@ function Login() {
     const login = async (data) => {
         setError("");
         setLoading(true);
+
         try {
             const session = await authService.login(data);
             if (session) {
@@ -97,6 +99,8 @@ function Login() {
                             </Button>
                         </div>
                     </form>
+
+                    <GuestLogin />
                 </div>
             </div>
             <div className="bg-[#29ca8e] text-white flex items-center bg-gradient-to-r from-[#26bc84] to-[#29ca8e] md:my-0 md:w-[35%]">
