@@ -22,17 +22,6 @@ function Header() {
             active: true,
         },
         {
-            name: "Login",
-            icon: <MdLogin />,
-            slug: "/login",
-            active: !authStatus,
-        },
-        {
-            name: "Sign Up",
-            slug: "/signup",
-            active: !authStatus,
-        },
-        {
             name: "All blogs",
             icon: <FaList />,
             slug: "/all-posts",
@@ -44,10 +33,21 @@ function Header() {
             slug: "/add-post",
             active: authStatus,
         },
+        {
+            name: "Login",
+            icon: <MdLogin />,
+            slug: "/login",
+            active: !authStatus,
+        },
+        {
+            name: "Sign Up",
+            slug: "/signup",
+            active: !authStatus,
+        },
     ];
 
     return (
-        <header className="sticky top-0 left-0 w-full shadow z-50 bg-white">
+        <header className="sticky top-0 left-0 w-full shadow-md z-50 bg-white">
             <Container>
                 <nav className="flex items-center min-h-[80px] max-w-[1200px] mx-auto">
                     <div>

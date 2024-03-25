@@ -46,7 +46,7 @@ function Carousel({ posts = [], className = "" }) {
 
     return (
         <div
-            className={`relative h-[50vh] mx-auto overflow-hidden p-4 duration-300 ${className} ${psuedoElement} sm:h-[70vh] md:h-screen`}
+            className={`relative h-[50vh] mx-auto overflow-hidden p-4 duration-300 ${className} ${psuedoElement} sm:h-[70vh] md:h-[90vh]`}
         >
             <div className="absolute inset-0 w-full h-full">
                 <img

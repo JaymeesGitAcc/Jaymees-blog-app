@@ -1,9 +1,10 @@
 import React from "react";
+import logo from "../Logo/BlissFulBlogger.png";
 
-function Logo({ width = "100%" }) {
+function Logo({ width = "100%", className = "" }) {
     return (
-        <div>
-            <h1>MyBlogWebsite</h1>
+        <div className={className}>
+            <h1>BlissFulBlogger</h1>
         </div>
     );
 }

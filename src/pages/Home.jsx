@@ -5,10 +5,8 @@ import PostCard from "../components/PostCard";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Animate from "../components/Animate";
-import Loading from "../components/Loading";
 import Carousel from "../components/Carousel";
 import HomeSkeleton from "../components/loaders/HomeSkeleton";
-// import { ToastContainer } from "react-toastify";
 
 function Home() {
     const [posts, setPosts] = useState([]);
@@ -46,7 +44,11 @@ function Home() {
 
     return !loading ? (
         <Animate>
-            {posts.length && <Carousel posts={posts.slice(0, 10)} />}
+            {posts.length > 0 && (
+                <div className="max-w-[1440px] mx-auto">
+                    <Carousel posts={posts.slice(0, 10)} />
+                </div>
+            )}
             <Container className="w-[95%] max-w-[1200px] mx-auto py-10">
                 <h1 className="text-2xl font-semibold text-slate-800 mb-4 md:text-3xl">
                     Recent Blog Posts

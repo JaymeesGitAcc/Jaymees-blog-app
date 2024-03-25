@@ -17,7 +17,6 @@ function GuestLogin() {
 
     const login = async (data) => {
         setIsLoggingIn(true);
-        console.log(data);
         try {
             const session = await authService.login(data);
             if (session) {
@@ -46,7 +45,7 @@ function GuestLogin() {
             >
                 <button
                     type="submit"
-                    className="flex items-center gap-2 py-2 px-6 mx-auto bg-[#3d15e3] duration-300 text-white rounded-full hover:bg-[#280e95]"
+                    className="flex items-center gap-2 py-2 px-6 mx-auto bg-violet-500 duration-300 text-white rounded-full hover:bg-violet-800"
                 >
                     {isLoggingIn ? (
                         <>

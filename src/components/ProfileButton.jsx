@@ -27,9 +27,9 @@ function ProfileButton({ className = "" }) {
     }, []);
     return (
         <div className={`relative ${className}`} ref={menuRef}>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center overflow-hidden h-12 w-12 rounded-lg shadow-md shadow-gray-900 duration-300 hover:-translate-y-[2px]">
                 <button
-                    className="inline-block h-10 w-10 rounded-full font-bold bg-black text-white"
+                    className="block w-full h-full font-bold bg-violet-800 text-white"
                     onClick={() => setShowMenu(!showMenu)}
                     data-id
                 >

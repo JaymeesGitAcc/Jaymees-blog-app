@@ -64,15 +64,6 @@ function Post() {
         }
     }, [slug, navigate]);
 
-    // const deletePost = () => {
-    //     appwriteService.deletePost(post.$id).then((status) => {
-    //         if (status) {
-    //             appwriteService.deleteFile(post.featuredImage);
-    //             navigate("/");
-    //         }
-    //     });
-    // };
-
     const dateObj = new Date(post?.$createdAt);
     const addedOn = `${dateObj.getDate()}/${
         dateObj.getMonth() + 1
@@ -145,7 +136,7 @@ function Post() {
                             <h2 className="text-2xl font-semibold text-slate-800 mt-8 mb-4">
                                 You may also like
                             </h2>
-                            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            <div className="md:grid grid-cols-2 gap-4 lg:grid-cols-3">
                                 {sameGenrePosts.map((post) => (
                                     <PostCard
                                         key={post.featuredImage}

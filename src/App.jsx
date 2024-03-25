@@ -42,9 +42,7 @@ function App() {
                     <main location={location} key={location.pathname}>
                         <Outlet />
                     </main>
-                    <div className="w-full block">
-                        <Footer />
-                    </div>
+                    <Footer />
                     <ScrollToTop />
                 </div>
             </AnimatePresence>
