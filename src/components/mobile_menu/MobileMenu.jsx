@@ -13,7 +13,7 @@ function MobileMenu({ menuItems = [], className = "", onClick }) {
     };
     return (
         <nav className={`${className}`}>
-            <ul className="space-y-5 my-[100px] mx-10">
+            <ul className="space-y-10 my-[100px] mx-10">
                 {menuItems.map((item) =>
                     item.active ? (
                         <li

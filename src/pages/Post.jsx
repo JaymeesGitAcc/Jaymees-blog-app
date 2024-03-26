@@ -110,26 +110,6 @@ function Post() {
                             {parse(post.content)}
                         </div>
                     </article>
-                    {/* <Container>
-                        {isAuthor && (
-                            <div className="absolute-right-6 top-6">
-                                <Link to={`/edit-post/${post.$id}`}>
-                                    <Button
-                                        bgColor="bg-green-500"
-                                        className="mr-3"
-                                    >
-                                        <FaEdit />
-                                    </Button>
-                                </Link>
-                                <Button
-                                    bgColor="bg-red-500"
-                                    onClick={deletePost}
-                                >
-                                    <MdDelete />
-                                </Button>
-                            </div>
-                        )}
-                    </Container> */}
 
                     {sameGenrePosts?.length > 0 && (
                         <div className="px-4">
@@ -141,7 +121,7 @@ function Post() {
                                     <PostCard
                                         key={post.featuredImage}
                                         {...post}
-                                        className="rounded-lg h-[200px] md:h-auto"
+                                        className="rounded-lg h-[200px] my-4 md:h-auto md:my-0"
                                     />
                                 ))}
                             </div>

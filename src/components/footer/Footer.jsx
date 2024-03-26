@@ -73,14 +73,16 @@ function Footer() {
     return (
         <footer className="p-4 bg-[#0c1a33]">
             <section className="w-[95%] max-w-[1200px] mx-auto">
-                <div className="space-y-6 md:space-y-0 md:flex md:justify-between md:gap-4 md:my-4">
+                <div className="space-y-10 md:space-y-0 md:flex md:justify-between md:gap-4 md:my-4">
                     <article>
-                        <Link to="/" className="inline-block">
-                            <Logo className="text-green-500" />
-                        </Link>
-                        <p className="text-white text-sm">
-                            Explore and create amazing blog posts!
-                        </p>
+                        <div className="space-y-3">
+                            <Link to="/" className="inline-block">
+                                <Logo />
+                            </Link>
+                            <p className="text-white text-sm font-semibold font-mono">
+                                Explore and create amazing blog posts!!!
+                            </p>
+                        </div>
                     </article>
 
                     <article>
@@ -92,7 +94,7 @@ function Footer() {
                                 {footerLinks.map((item) =>
                                     item.active ? (
                                         <Link key={item.name} to={item.path}>
-                                            <li className="text-gray-400 duration-300 hover:text-gray-300 px-4 py-2">
+                                            <li className="text-gray-400 duration-300 px-4 py-2 text-sm hover:text-gray-300 hover:translate-x-2 md:text-md">
                                                 {item.name}
                                             </li>
                                         </Link>
