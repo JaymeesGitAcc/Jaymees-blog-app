@@ -32,11 +32,26 @@ function Home() {
 
     if (!authStatus) {
         return (
-            <div className="flex items-center justify-center w-full min-h-screen">
-                <div className="">
-                    <h1 className="text-2xl text-slate-800 font-semibold">
-                        Login to read posts
-                    </h1>
+            <div className="min-h-[60vh] md:min-h-[70vh]">
+                <div className="p-10">
+                    <div className="max-w-[500px] mx-auto">
+                        <img
+                            src="https://i.ibb.co/5BCcDYB/Remote2.png"
+                            alt="person-on-the-beach"
+                            className="block w-full"
+                        />
+                    </div>
+                    <div className="text-center p-4 my-6">
+                        <h1 className="text-xl text-slate-800 font-semibold">
+                            <Link
+                                to="/login"
+                                className="inline-block bg-gradient-to-r from-[#29ca8e] to-violet-500 text-white text-sm rounded-full px-4 py-2 duration-300 hover:-translate-y-1"
+                            >
+                                Login/Guest
+                            </Link>{" "}
+                            to read blogs.
+                        </h1>
+                    </div>
                 </div>
             </div>
         );
