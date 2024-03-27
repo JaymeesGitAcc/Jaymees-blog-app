@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "./store/authSlice";
@@ -40,7 +40,9 @@ function App() {
                 <div className="min-h-screen">
                     <Header />
                     <main location={location} key={location.pathname}>
-                        <Outlet />
+                        <Suspense fallback={<Loading />}>
+                            <Outlet />
+                        </Suspense>
                     </main>
                     <Footer />
                     <ScrollToTop />

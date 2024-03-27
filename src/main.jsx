@@ -6,16 +6,17 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import Home from "./pages/Home.jsx";
-import Protected from "./components/AuthLayout.jsx";
-import Login from "./pages/Login.jsx";
-import Signup from "./pages/Singup.jsx";
-import AllPosts from "./pages/AllPosts.jsx";
-import AddPost from "./pages/AddPost.jsx";
-import EditPost from "./pages/EditPost.jsx";
-import Post from "./pages/Post.jsx";
-import PostsByGenre from "./pages/PostsByGenre.jsx";
-import NotFound from "./pages/NotFound.jsx";
-import Profile from "./pages/Profile.jsx";
+
+const Protected = React.lazy(() => import("./components/AuthLayout.jsx"));
+const Login = React.lazy(() => import("./pages/Login.jsx"));
+const Signup = React.lazy(() => import("./pages/Singup.jsx"));
+const AllPosts = React.lazy(() => import("./pages/AllPosts.jsx"));
+const AddPost = React.lazy(() => import("./pages/AddPost.jsx"));
+const EditPost = React.lazy(() => import("./pages/EditPost.jsx"));
+const Post = React.lazy(() => import("./pages/Post.jsx"));
+const PostsByGenre = React.lazy(() => import("./pages/PostsByGenre.jsx"));
+const NotFound = React.lazy(() => import("./pages/NotFound.jsx"));
+const Profile = React.lazy(() => import("./pages/Profile.jsx"));
 
 const router = createBrowserRouter([
     {
