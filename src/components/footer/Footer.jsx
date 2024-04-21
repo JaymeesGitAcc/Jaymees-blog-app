@@ -2,12 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo";
 import { useSelector } from "react-redux";
-import {
-    FaFacebookF,
-    FaInstagram,
-    FaLinkedinIn,
-    FaTwitter,
-} from "react-icons/fa6";
+import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 function Footer() {
     const date = new Date();
@@ -50,24 +45,19 @@ function Footer() {
 
     const socialLinks = [
         {
-            name: "facebook",
-            path: "/",
-            icon: <FaFacebookF />,
-        },
-        {
-            name: "instagram",
-            path: "/",
-            icon: <FaInstagram />,
-        },
-        {
-            name: "twitter",
-            path: "/",
-            icon: <FaTwitter />,
+            name: "Github",
+            path: "https://github.com/JaymeesGitAcc/Jaymees-blog-app",
+            icon: <FaGithub />,
         },
         {
             name: "linkedin",
-            path: "/",
+            path: "https://www.linkedin.com/in/andrew-prajwal-james",
             icon: <FaLinkedinIn />,
+        },
+        {
+            name: "twitter",
+            path: "https://twitter.com/AndrewJame958",
+            icon: <FaXTwitter />,
         },
     ];
     return (
@@ -115,14 +105,15 @@ function Footer() {
                             <ul className="flex gap-4 my-4">
                                 {socialLinks.map((item) => (
                                     <div key={item.name} className="group">
-                                        <Link
-                                            to="/"
+                                        <a
+                                            href={item.path}
+                                            target="_blank"
                                             className="inline-block border rounded-lg p-2 duration-300 group-hover:bg-white"
                                         >
                                             <i className="text-white duration-300 group-hover:text-[#0c1a33]">
                                                 {item.icon}
                                             </i>
-                                        </Link>
+                                        </a>
                                     </div>
                                 ))}
                             </ul>
